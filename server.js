@@ -13,7 +13,9 @@ io.on('connection',(socket)=>{
     console.log("A user is Connected");
 
     socket.on('chat message',(msg)=>{
-        io.emit('chat message',msg);
+        const timestamp = new Date().toLocaleTimeString();
+        const message = {text : msg, timestamp : timestamp};
+        io.emit('chat message',message);
     });
 
     socket.on('disconnect',()=>{

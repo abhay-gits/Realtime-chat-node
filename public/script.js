@@ -9,9 +9,24 @@ function sendMessage(){
     }
 }
 
-socket.on('chat message',(msg)=>{
+socket.on('chat message',(message)=>{
+        appendMessage(message);
+})
+
+function appendMessage(message){
+
+    //
     const ul = document.getElementById('messages');
     const li = document.createElement('li');
-    li.textContent = msg;
+    //
+    const timestampspan = document.createElement('span');
+    timestampspan.className = 'timestamp';
+    timestampspan.textContent = `[${message.timestamp}]`;
+
+    const tmessage = document.createTextNode(message.text);
+    //
+    li.appendChild(tmessage);
+    li.appendChild(timestampspan);
+    
     ul.appendChild(li);
-});
+}
